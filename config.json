@@ -1,0 +1,4 @@
+{
+ "records_file_name" : "test_data/records.jsonl", 
+ "index_file_name" : "test_data/index.jsonl"
+}
