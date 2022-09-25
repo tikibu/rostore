@@ -15,8 +15,6 @@ import (
 	"github.com/tikibu/rostore/store"
 )
 
-var addr = ":6380"
-
 /*func mockStore() (*store.Store, error) {
 	records := store.MockRecords()
 
