@@ -43,11 +43,11 @@ func MockRecords() (records []Record) {
 			Type: ZSetType,
 			OrdderSetRecord: &OrderedSetRecord{
 				Elements: []OrderedSetElement{
-					OrderedSetElement{
+					{
 						Value: fmt.Sprintf("key%d:zset:1", i),
 						Score: 1.0,
 					},
-					OrderedSetElement{
+					{
 						Value: fmt.Sprintf("key%d:zset:2", i),
 						Score: 2.0,
 					},

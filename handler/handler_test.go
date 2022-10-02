@@ -34,6 +34,8 @@ func mockStore(t *testing.T) *store.Store {
 	},
 		bytes.NewReader(indexBuf.Bytes()))
 
+	assert.NoError(t, err)
+
 	return store
 }
 

@@ -133,11 +133,14 @@ func generateIndex(recordsFileName string, indexFileName string) error {
 	}
 	// open file for writing
 	indexFile, err := os.OpenFile(indexFileName, os.O_WRONLY|os.O_CREATE, 0644)
+	if err != nil {
+		return err
+	}
+	defer indexFile.Close()
 	err = index.WriteJsonl(indexFile)
 	if err != nil {
 		return err
 	}
-	indexFile.Close()
 	return nil
 }
 

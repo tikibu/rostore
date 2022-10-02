@@ -7,7 +7,6 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-	"sync"
 	"text/template"
 
 	"github.com/tidwall/redcon"
@@ -17,7 +16,6 @@ import (
 type Handler struct {
 	Store   *store.Store
 	Cursors map[string]map[int]string
-	mu      sync.Mutex
 }
 
 func NewHandler(store *store.Store) *Handler {
@@ -89,7 +87,7 @@ func (h *Handler) Get(conn redcon.Conn, cmd redcon.Command) {
 	}
 
 	if err != nil {
-		conn.WriteError(fmt.Sprintf("ERR occured while retrieving record for key %s", err.Error()))
+		conn.WriteError(fmt.Sprintf("ERR occurred while retrieving record for key %s", err.Error()))
 		return
 	}
 
@@ -120,7 +118,7 @@ func (h *Handler) Type(conn redcon.Conn, cmd redcon.Command) {
 	}
 
 	if err != nil {
-		conn.WriteError(fmt.Sprintf("ERR occured while retrieving record for key %s", err.Error()))
+		conn.WriteError(fmt.Sprintf("ERR occurred while retrieving record for key %s", err.Error()))
 		return
 	}
 
@@ -147,7 +145,7 @@ func (h *Handler) MemoryUsage(conn redcon.Conn, cmd redcon.Command) {
 	}
 
 	if err != nil {
-		conn.WriteError(fmt.Sprintf("ERR occured while retrieving record for key %s", err.Error()))
+		conn.WriteError(fmt.Sprintf("ERR occurred while retrieving record for key %s", err.Error()))
 		return
 	}
 
@@ -169,7 +167,7 @@ func (h *Handler) HLen(conn redcon.Conn, cmd redcon.Command) {
 	}
 
 	if err != nil {
-		conn.WriteError(fmt.Sprintf("ERR occured while retrieving record for key %s", err.Error()))
+		conn.WriteError(fmt.Sprintf("ERR occurred while retrieving record for key %s", err.Error()))
 		return
 	}
 
@@ -202,7 +200,7 @@ func (h *Handler) ZCard(conn redcon.Conn, cmd redcon.Command) {
 	}
 
 	if err != nil {
-		conn.WriteError(fmt.Sprintf("ERR occured while retrieving record for key %s", err.Error()))
+		conn.WriteError(fmt.Sprintf("ERR occurred while retrieving record for key %s", err.Error()))
 		return
 	}
 
@@ -235,7 +233,7 @@ func (h *Handler) LLen(conn redcon.Conn, cmd redcon.Command) {
 	}
 
 	if err != nil {
-		conn.WriteError(fmt.Sprintf("ERR occured while retrieving record for key %s", err.Error()))
+		conn.WriteError(fmt.Sprintf("ERR occurred while retrieving record for key %s", err.Error()))
 		return
 	}
 
@@ -263,12 +261,12 @@ func (h *Handler) LRange(conn redcon.Conn, cmd redcon.Command) {
 
 	start, err := strconv.Atoi(string(cmd.Args[2]))
 	if err != nil {
-		conn.WriteError("ERR occured while parsing start ")
+		conn.WriteError("ERR occurred while parsing start ")
 		return
 	}
 	stop, err := strconv.Atoi(string(cmd.Args[3]))
 	if err != nil {
-		conn.WriteError("ERR occured while parsing stop ")
+		conn.WriteError("ERR occurred while parsing stop ")
 		return
 	}
 
@@ -279,7 +277,7 @@ func (h *Handler) LRange(conn redcon.Conn, cmd redcon.Command) {
 	}
 
 	if err != nil {
-		conn.WriteError(fmt.Sprintf("ERR occured while retrieving record for key %s", err.Error()))
+		conn.WriteError(fmt.Sprintf("ERR occurred while retrieving record for key %s", err.Error()))
 		return
 	}
 
@@ -338,9 +336,9 @@ func (h *Handler) Delete(conn redcon.Conn, cmd redcon.Command) {
 }
 
 var section_sets = map[string][]string{
-	"all":        []string{"server", "clients", "memory", "persistence", "stats", "replication", "cpu", "cluster", "keyspace"},
-	"default":    []string{"server", "clients", "memory", "persistence", "stats", "replication", "cpu", "cluster", "keyspace"},
-	"everything": []string{"server", "clients", "memory", "persistence", "stats", "replication", "cpu", "cluster", "keyspace"},
+	"all":        {"server", "clients", "memory", "persistence", "stats", "replication", "cpu", "cluster", "keyspace"},
+	"default":    {"server", "clients", "memory", "persistence", "stats", "replication", "cpu", "cluster", "keyspace"},
+	"everything": {"server", "clients", "memory", "persistence", "stats", "replication", "cpu", "cluster", "keyspace"},
 }
 
 var info_template = map[string]*template.Template{
@@ -448,7 +446,7 @@ func (h *Handler) HScan(conn redcon.Conn, cmd redcon.Command) {
 	}
 
 	if err != nil {
-		conn.WriteError(fmt.Sprintf("ERR occured while retrieving record for key %s", err.Error()))
+		conn.WriteError(fmt.Sprintf("ERR occurred while retrieving record for key %s", err.Error()))
 		return
 	}
 
@@ -528,7 +526,7 @@ func (h *Handler) HGetAll(conn redcon.Conn, cmd redcon.Command) {
 	}
 
 	if err != nil {
-		conn.WriteError(fmt.Sprintf("ERR occured while retrieving record for key %s", err.Error()))
+		conn.WriteError(fmt.Sprintf("ERR occurred while retrieving record for key %s", err.Error()))
 		return
 	}
 
