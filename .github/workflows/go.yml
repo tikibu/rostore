@@ -31,7 +31,8 @@ jobs:
           GO111MODULE: off
         run: go get github.com/mattn/goveralls
 
-      - name: Send coverage
-        env:
-          COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
-        run: goveralls -coverprofile=covprofile.cov -service=github -repotoken $COVERALLS_TOKEN
+      - name: Upload coverage
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage.coverprofile
