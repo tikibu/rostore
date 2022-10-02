@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/tikibu/rostore/branch/main/graph/badge.svg)](https://codecov.io/gh/tikibu/rostore)
 [![Go Report Card](https://goreportcard.com/badge/github.com/tikibu/rostore)](https://goreportcard.com/report/github.com/tikibu/rostore)
 
-
+ 
 A common pattern for dynamic languages like php and python is to use a standalone high-performant store for runtime config, because this is common way to share a state. 
 
 Frequent choices are KV stores like memcached, Redis(r), Aerospike(r)
